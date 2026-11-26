@@ -1,6 +1,7 @@
 const { Server } = require('socket.io');
 const socketAuth = require('./socketAuth');
 const chatHandler = require('./chatHandler');
+const meetingHandler = require('./meetingHandler');
 const User = require('../models/User');
 
 const initializeSocket = (server) => {
@@ -16,12 +17,21 @@ const initializeSocket = (server) => {
   io.use(socketAuth);
 
   io.on('connection', async (socket) => {
-    console.log(`[Socket Connected]: ${socket.user.name} (${socket.id})`);
-
     await User.findByIdAndUpdate(socket.user._id, { isOnline: true });
     io.emit('user_status_change', { userId: socket.user._id, isOnline: true });
 
     chatHandler(io, socket);
+    meetingHandler(io, socket);
+
+    socket.on('disconnect', () => {
+      if (socket.roomCode) {
+        socket.to(`meeting:${socket.roomCode}`).emit('user_left_meeting', {
+          socketId: socket.id,
+          userId: socket.user._id.toString(),
+          userName: socket.user.name,
+        });
+      }
+    });
   });
 
   return io;

@@ -16,7 +16,7 @@ const app = express();
 const server = http.createServer(app);
 
 const io = initializeSocket(server);
-app.set('io', io); 
+app.set('io', io);
 
 app.use(helmet({ crossOriginResourcePolicy: false }));
 app.use(cors({ origin: process.env.CLIENT_URL || '*', credentials: true }));
@@ -30,13 +30,14 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.get('/api/health', (req, res) => {
-  res.status(200).json({ status: 'OK', message: 'SignVerse API & WebSocket Server Running' });
+  res.status(200).json({ status: 'OK', message: 'SignVerse API & WebRTC Signaling Server Running' });
 });
 
 app.use('/api/auth', require('./routes/auth.routes'));
 app.use('/api/channels', require('./routes/channel.routes'));
 app.use('/api/messages', require('./routes/message.routes'));
 app.use('/api/gestures', require('./routes/gesture.routes'));
+app.use('/api/meetings', require('./routes/meeting.routes'));
 
 app.use((req, res) => {
   res.status(404).json({ success: false, message: 'Route not found' });
