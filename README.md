@@ -17,7 +17,7 @@ SignVerse is an AI-powered multimodal communication platform designed to enable 
 
 ## 🏛️ System Architecture
 
-[React 19 Frontend (:5173)] │ ├─── HTTP REST APIs ────► [Node.js Express Server (:5000)] ──► [MongoDB Database] │ │ ├─── WebSockets (Socket.io) ────────┤ (Signaling, Chat, Presence) │ │ └─── Live Camera Frames (8 FPS) ────┼──► [FastAPI ML Service (:8000)] │ ▼ [Trained Model (.keras)] (1D-CNN + BiLSTM, 87.5% Acc)
+[React 19 Frontend (:5173)] │ ├─── HTTP REST APIs ────► [Node.js Express Server (:5000)] ──► [MongoDB Database] │ │ ├─── WebSockets (Socket.io) ────────┤ (Signaling, Chat, Presence) │ │ └─── Live Camera Frames (8 FPS) │──────► [FastAPI ML Service (:8000)] │ ▼ [Trained Model (.keras)] (1D-CNN + BiLSTM, 87.5% Acc)
 
 ---
 ## 🚀 Quick Start Guide (Running the Full System)
@@ -29,10 +29,10 @@ npm run dev
 
 Runs on: http://localhost:5000
 Features: JWT Auth, MongoDB, WebRTC Signaling, Socket.io Chat, Media Uploads.
+```
 
-
-2. Frontend Application (React / Vite)
-bash
+### 2. Frontend Application (React / Vite)
+```bash
 
 cd frontend/signverse-react
 npm install
@@ -40,10 +40,10 @@ npm run dev
 
 Runs on: http://localhost:5173
 Automatically proxies all /api/* requests to port 5000.
+```
 
-
-3. ML Inference Microservice (Python FastAPI)
-bash
+### 3. ML Inference Microservice (Python FastAPI)
+```bash
 
 cd ml-service
 pip install -r requirements.txt
@@ -51,3 +51,4 @@ uvicorn app.main:app --reload --port 8000
 
 Runs on: http://localhost:8000
 Interactive API Documentation: http://localhost:8000/docs
+```
