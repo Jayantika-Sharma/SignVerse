@@ -7,6 +7,7 @@ const morgan = require('morgan');
 const path = require('path');
 const connectDB = require('./config/db');
 const initializeSocket = require('./socket');
+const { register, login } = require('./controllers/auth.controller');
 
 dotenv.config();
 
@@ -19,7 +20,10 @@ const io = initializeSocket(server);
 app.set('io', io);
 
 app.use(helmet({ crossOriginResourcePolicy: false }));
-app.use(cors({ origin: process.env.CLIENT_URL || '*', credentials: true }));
+app.use(cors({ origin: '*', credentials: true }));
+
+app.use('/api/predict', express.raw({ type: 'image/jpeg', limit: '10mb' }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -30,8 +34,24 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.get('/api/health', (req, res) => {
-  res.status(200).json({ status: 'OK', message: 'SignVerse API & WebRTC Signaling Server Running' });
+  res.status(200).json({ status: 'OK', message: 'SignVerse API & WebRTC Server Running' });
 });
+
+app.post('/api/predict', (req, res) => {
+  if (!req.body || req.body.length === 0) {
+    return res.status(400).json({ caption: '', confidence: 0.0, boxes: [] });
+  }
+
+  return res.status(200).json({
+    caption: 'Hello',
+    confidence: 0.94,
+    final: true,
+    boxes: [{ x: 0.25, y: 0.25, w: 0.5, h: 0.5, label: 'hand' }],
+  });
+});
+
+app.post('/api/register', register);
+app.post('/api/login', login);
 
 app.use('/api/auth', require('./routes/auth.routes'));
 app.use('/api/channels', require('./routes/channel.routes'));

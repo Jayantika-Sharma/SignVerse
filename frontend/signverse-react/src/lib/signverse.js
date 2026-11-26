@@ -34,7 +34,7 @@
 
 /* ------------------------- 1. SETTINGS ------------------------- */
 export const SignVerseConfig = {
-  mode: new URLSearchParams(location.search).has('demo') ? 'demo' : 'off',   // <- change 'off' to 'http'
+  mode: new URLSearchParams(location.search).has('demo') ? 'demo' : 'http',   // <- change 'off' to 'http'
 
   httpEndpoint: '/api/predict',          // mode 'http'
   wsEndpoint:   'ws://localhost:8765',   // mode 'websocket'
