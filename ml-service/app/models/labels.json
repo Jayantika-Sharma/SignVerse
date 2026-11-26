@@ -1,13 +1,62 @@
 {
-  "0": {"label": "A", "category": "letter", "spoken": "A"},
-  "1": {"label": "B", "category": "letter", "spoken": "B"},
-  "2": {"label": "C", "category": "letter", "spoken": "C"},
-  "3": {"label": "1", "category": "number", "spoken": "One"},
-  "4": {"label": "2", "category": "number", "spoken": "Two"},
-  "5": {"label": "Hello", "category": "word", "spoken": "Hello"},
-  "6": {"label": "Thank You", "category": "word", "spoken": "Thank you"},
-  "7": {"label": "Yes", "category": "word", "spoken": "Yes"},
-  "8": {"label": "No", "category": "word", "spoken": "No"},
-  "9": {"label": "Please repeat", "category": "phrase", "spoken": "Please repeat that"},
-  "10": {"label": "I understand", "category": "statement", "spoken": "I understand what you mean"}
+  "0": {
+    "label": "bird",
+    "category": "word",
+    "spoken": "bird"
+  },
+  "1": {
+    "label": "cow",
+    "category": "word",
+    "spoken": "cow"
+  },
+  "2": {
+    "label": "donkey",
+    "category": "word",
+    "spoken": "donkey"
+  },
+  "3": {
+    "label": "duck",
+    "category": "word",
+    "spoken": "duck"
+  },
+  "4": {
+    "label": "hear",
+    "category": "word",
+    "spoken": "hear"
+  },
+  "5": {
+    "label": "listen",
+    "category": "word",
+    "spoken": "listen"
+  },
+  "6": {
+    "label": "look",
+    "category": "word",
+    "spoken": "look"
+  },
+  "7": {
+    "label": "mouse",
+    "category": "word",
+    "spoken": "mouse"
+  },
+  "8": {
+    "label": "pretend",
+    "category": "word",
+    "spoken": "pretend"
+  },
+  "9": {
+    "label": "shhh",
+    "category": "word",
+    "spoken": "shhh"
+  },
+  "10": {
+    "label": "sleepy",
+    "category": "word",
+    "spoken": "sleepy"
+  },
+  "11": {
+    "label": "uncle",
+    "category": "word",
+    "spoken": "uncle"
+  }
 }
