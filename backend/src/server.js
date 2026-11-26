@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const path = require('path');
 const connectDB = require('./config/db');
+const initializeSocket = require('./socket');
 
 dotenv.config();
 
@@ -14,7 +15,10 @@ connectDB();
 const app = express();
 const server = http.createServer(app);
 
-app.use(helmet({ crossOriginResourcePolicy: false })); // Allow serving uploaded media across origins
+const io = initializeSocket(server);
+app.set('io', io); 
+
+app.use(helmet({ crossOriginResourcePolicy: false }));
 app.use(cors({ origin: process.env.CLIENT_URL || '*', credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -26,7 +30,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.get('/api/health', (req, res) => {
-  res.status(200).json({ status: 'OK', message: 'SignVerse API is running' });
+  res.status(200).json({ status: 'OK', message: 'SignVerse API & WebSocket Server Running' });
 });
 
 app.use('/api/auth', require('./routes/auth.routes'));
